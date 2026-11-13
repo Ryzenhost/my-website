@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeDomain Hub — Free domains for everyone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="auth" class="auth-wrap">
+  <div class="auth-card">
+    <div class="brand"><span class="brand-icon">F</span><span>FreeDomain<span class="muted">Hub</span></span></div>
+    <div class="auth-heading"><p class="eyebrow">YOUR FREE INTERNET IDENTITY</p><h1 id="authTitle">Chào mừng trở lại</h1><p class="muted">Quản lý tên miền và website của bạn tại một nơi.</p></div>
+    <form id="authForm">
+      <label id="nameLabel" class="hidden">Tên hiển thị<input id="displayName" placeholder="Tên của bạn"></label>
+      <label>Email<input id="email" type="email" placeholder="you@example.com" required></label>
+      <label>Mật khẩu<input id="password" type="password" placeholder="••••••••" minlength="6" required></label>
+      <button class="btn primary full" id="authSubmit">Đăng nhập</button>
+    </form>
+    <p class="auth-switch"><span id="switchText">Chưa có tài khoản?</span> <button id="switchAuth" class="link-btn">Đăng ký</button></p>
+    <p class="tiny muted">Bản demo: tài khoản chỉ lưu trong trình duyệt hiện tại.</p>
+  </div>
+</div>
+<div id="app" class="app hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand side-brand"><span class="brand-icon">F</span><span>FreeDomain<span class="muted">Hub</span></span></div>
+    <div class="workspace"><div class="avatar">FD</div><div><b>Personal workspace</b><small id="sideEmail">user@example.com</small></div><span class="dots">•••</span></div>
+    <p class="nav-label">WORKSPACE</p>
+    <button class="nav active" data-page="overview"><span>▦</span> Tổng quan</button>
+    <button class="nav" data-page="domains"><span>◎</span> Tên miền <em id="domainCount">0</em></button>
+    <button class="nav" data-page="websites"><span>▤</span> Website & File</button>
+    <button class="nav" data-page="dns"><span>⌁</span> DNS & Nameservers</button>
+    <div id="adminNav"><p class="nav-label">ADMINISTRATION</p><button class="nav" data-page="admin"><span>⚙</span> Quản trị hệ thống</button></div>
+    <div class="sidebar-bottom"><div class="help-box"><b>Cần trợ giúp?</b><small>Đọc hướng dẫn sử dụng nền tảng.</small><a href="README.txt" target="_blank">Xem hướng dẫn ↗</a></div><button class="nav logout" id="logout"><span>⇥</span> Đăng xuất</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><button id="mobileMenu" class="icon-btn">☰</button><div class="crumb">Workspace <span>/</span> <b id="pageName">Tổng quan</b></div><div class="top-actions"><span class="status"><i></i> Demo environment</span><div class="user-pill"><div class="avatar small" id="userAvatar">U</div><span id="userName">User</span></div></div></header>
+    <section class="content">
+      <div id="notice" class="notice hidden"></div>
+      <section class="page" id="page-overview">
+        <div class="welcome-row"><div><p class="eyebrow">CONTROL CENTER</p><h1>Xin chào, <span id="welcomeName">bạn</span> <span class="wave">✦</span></h1><p class="muted">Đây là tổng quan không gian tên miền của bạn.</p></div><button class="btn primary" data-action="new-domain">＋ Tạo tên miền</button></div>
+        <div class="stats">
+          <div class="stat-card"><div class="stat-top"><span>Tên miền của tôi</span><span class="stat-icon">◎</span></div><strong id="statDomains">0</strong><small class="muted">Subdomain đã tạo</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Website</span><span class="stat-icon">▤</span></div><strong id="statSites">0</strong><small class="muted">Dự án website</small></div>
+          <div class="stat-card"><div class="stat-top"><span>File đã thêm</span><span class="stat-icon">↥</span></div><strong id="statFiles">0</strong><small class="muted">Trong phiên demo</small></div>
+          <div class="stat-card"><div class="stat-top"><span>Gói dịch vụ</span><span class="stat-icon">✧</span></div><strong class="plan">FREE</strong><small class="muted">Miễn phí trải nghiệm</small></div>
+        </div>
+        <div class="section-head"><div><h2>Truy cập nhanh</h2><p class="muted">Bắt đầu quản lý tài nguyên của bạn.</p></div></div>
+        <div class="quick-grid">
+          <button class="quick-card" data-action="new-domain"><span class="quick-icon green">◎</span><b>Tạo subdomain</b><small>Chọn tên miền miễn phí</small><span class="arrow">↗</span></button>
+          <button class="quick-card" data-page="websites"><span class="quick-icon purple">▤</span><b>Quản lý website</b><small>Upload và quản lý file</small><span class="arrow">↗</span></button>
+          <button class="quick-card" data-page="dns"><span class="quick-icon blue">⌁</span><b>Cấu hình DNS</b><small>Records và nameservers</small><span class="arrow">↗</span></button>
+        </div>
+        <div class="section-head"><div><h2>Tên miền gần đây</h2><p class="muted">Danh sách subdomain của bạn.</p></div><button class="text-btn" data-page="domains">Xem tất cả →</button></div>
+        <div class="table-card"><table><thead><tr><th>TÊN MIỀN</th><th>TRẠNG THÁI</th><th>NGÀY TẠO</th><th></th></tr></thead><tbody id="recentDomains"><tr><td colspan="4" class="empty">Chưa có tên miền. Hãy tạo subdomain đầu tiên.</td></tr></tbody></table></div>
+      </section>
+      <section class="page hidden" id="page-domains">
+        <div class="page-heading"><div><p class="eyebrow">DOMAIN MANAGEMENT</p><h1>Tên miền</h1><p class="muted">Tạo và quản lý các subdomain của bạn.</p></div><button class="btn primary" data-action="new-domain">＋ Tạo tên miền</button></div>
+        <div class="info-banner"><b>ⓘ Bản demo:</b> Tên miền tạo tại đây chỉ được lưu trong trình duyệt, chưa được đăng ký DNS công khai.</div>
+        <div class="table-card"><table><thead><tr><th>TÊN MIỀN</th><th>LOẠI</th><th>TRẠNG THÁI</th><th>NGÀY TẠO</th><th></th></tr></thead><tbody id="domainRows"></tbody></table></div>
+      </section>
+      <section class="page hidden" id="page-websites">
+        <div class="page-heading"><div><p class="eyebrow">WEB FILE MANAGER</p><h1>Website & File</h1><p class="muted">Quản lý tệp website trong phiên trình duyệt này.</p></div><label class="btn primary upload-btn">↥ Upload file<input type="file" id="fileInput" multiple hidden></label></div>
+        <div class="info-banner"><b>ⓘ Lưu ý:</b> File chỉ được đọc trong trình duyệt, chưa upload lên hosting/server và không tự xuất bản website.</div>
+        <div class="file-toolbar"><div><b>Tệp của tôi</b><small class="muted" id="fileSummary">0 tệp</small></div><button class="btn secondary small-btn" id="clearFiles">Xóa danh sách</button></div>
+        <div class="file-grid" id="fileGrid"><div class="empty-box">Chưa có file nào. Chọn Upload file để thử nghiệm.</div></div>
+      </section>
+      <section class="page hidden" id="page-dns">
+        <div class="page-heading"><div><p class="eyebrow">DNS CONFIGURATION</p><h1>DNS & Nameservers</h1><p class="muted">Thông tin cấu hình DNS minh họa cho tên miền.</p></div></div>
+        <div class="info-banner"><b>ⓘ Demo:</b> Thay đổi ở đây không cập nhật DNS Internet. Cần nhà cung cấp DNS và backend có xác thực.</div>
+        <div class="two-col"><div class="panel"><div class="panel-head"><div><h2>Nameservers</h2><p class="muted">Máy chủ DNS được ủy quyền</p></div><span class="pill">Example</span></div><div class="ns-row"><code>ns1.example-dns.com</code><button class="copy-btn" data-copy="ns1.example-dns.com">Copy</button></div><div class="ns-row"><code>ns2.example-dns.com</code><button class="copy-btn" data-copy="ns2.example-dns.com">Copy</button></div><p class="tiny muted">Đây là giá trị minh họa, không phải nameserver hoạt động.</p></div>
+        <div class="panel"><div class="panel-head"><div><h2>DNS Records</h2><p class="muted">Bản ghi mẫu</p></div><button class="btn secondary small-btn" id="addRecord">＋ Thêm record</button></div><div class="record-list" id="recordList"><div class="record"><b>A</b><span>@</span><code>192.0.2.1</code><small>Demo</small></div><div class="record"><b>CNAME</b><span>www</span><code>example.invalid</code><small>Demo</small></div></div></div></div>
+      </section>
+      <section class="page hidden" id="page-admin">
+        <div class="page-heading"><div><p class="eyebrow">SYSTEM CONTROL</p><h1>Quản trị hệ thống</h1><p class="muted">Quản lý tài khoản và tài nguyên trong dữ liệu demo trên thiết bị này.</p></div><span class="pill admin-pill">Administrator</span></div>
+        <div class="info-banner warning"><b>⚠ Bảo mật:</b> Quyền admin phía trình duyệt không an toàn. Không dùng bản demo để vận hành dịch vụ thật.</div>
+        <div class="stats admin-stats"><div class="stat-card"><span class="muted">Tổng người dùng</span><strong id="adminUsers">0</strong></div><div class="stat-card"><span class="muted">Tổng subdomain</span><strong id="adminDomains">0</strong></div><div class="stat-card"><span class="muted">Tổng website</span><strong id="adminSites">0</strong></div></div>
+        <div class="section-head"><div><h2>Người dùng</h2><p class="muted">Tài khoản trên trình duyệt hiện tại.</p></div></div><div class="table-card"><table><thead><tr><th>NGƯỜI DÙNG</th><th>EMAIL</th><th>VAI TRÒ</th><th>THAO TÁC</th></tr></thead><tbody id="userRows"></tbody></table></div>
+        <div class="section-head"><div><h2>Tất cả subdomain</h2><p class="muted">Danh sách tài nguyên demo.</p></div></div><div class="table-card"><table><thead><tr><th>TÊN MIỀN</th><th>CHỦ SỞ HỮU</th><th>TRẠNG THÁI</th><th></th></tr></thead><tbody id="adminDomainRows"></tbody></table></div>
+      </section>
+    </section>
+  </main>
+</div>
+<div class="modal-backdrop hidden" id="domainModal"><div class="modal"><div class="modal-top"><div><p class="eyebrow">FREE SUBDOMAIN</p><h2>Tạo tên miền mới</h2></div><button class="icon-btn" data-close>✕</button></div><p class="muted">Chọn tên dễ nhớ cho website của bạn.</p><form id="domainForm"><label>Tên subdomain<input id="subName" placeholder="my-awesome-site" required pattern="[a-zA-Z0-9-]{3,30}" maxlength="30"></label><label>Đuôi tên miền<select id="domainSuffix"><option value="freedomain.demo">.freedomain.demo</option><option value="myweb.demo">.myweb.demo</option><option value="sitehub.demo">.sitehub.demo</option></select></label><div class="domain-preview"><small>Địa chỉ dự kiến</small><b id="domainPreview">my-awesome-site.freedomain.demo</b></div><button class="btn primary full">Tạo subdomain</button></form></div></div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
